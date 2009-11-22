@@ -1,0 +1,50 @@
+<html>
+<head><title>jQueue Admin</title>
+	<script src="js/jquery.js" type="text/javascript"></script>
+	<style type="text/css" media="all">
+ 		
+		.keydiv {
+			 width: 700px; 
+			 border:1px solid;
+			 padding:10px;
+			 background: #acc;
+		}
+		.text{
+			margin: 0 3em 1.25em;
+			font-size: 1em;
+			line-height: 1em;
+			font-family: georgia, serif;
+
+		}
+		
+		.rig {
+			float: right;
+		}
+		
+		.par {
+			font-size: 1em;
+			line-height: 1.25em;
+			margin: 1.25em 0;
+			text-align: left;
+		}
+	</style>
+<head>
+<body>
+	<br><br>
+
+	
+	<div class="text">
+		<p class="par"> Generate or update your API key<br>
+		Username: {{username}} </p>			
+		<div class="keydiv">
+			<p id="key">{{apikey}}</p>
+                        <form method='POST' action='/admin'>
+                            <input type="submit" class="rig" name="submit" id="submit" value="Generate New Key">
+                        </form>
+		<br>
+		</div>
+
+	</div>
+</body>
+</html>
+

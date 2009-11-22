@@ -1,0 +1,134 @@
+<html>
+<head><title>jQueue</title>
+	<style type="text/css" media="all">
+ 		.protocol { 
+			 border:1px solid;
+			 padding:30px;
+			 background: #fcc;
+		}
+		.desc {
+			 width: 700px; 
+			 border:1px solid;
+			 padding:10px;
+			 background: #acc;
+		}
+		.response { 
+			 border:1px solid;
+			 padding:30px;
+			 background: #ffc;
+		}
+		.par {
+			font-size: 1em;
+			line-height: 1.25em;
+			margin: 1.25em 0;
+			text-align: left;
+		}
+		.text{
+			margin: 0 3em 1.25em;
+			font-size: 1em;
+			line-height: 1em;
+			font-family: georgia, serif;
+
+		}
+
+	</style>
+
+<head>
+<body>
+	<img src="/images/pork_banner.jpg">
+	<br><br>
+	<div class="text">
+	<p class="par"> <b>jQueue</b> is a appengine based queue. The algorithm is very simple, as in FIFO.<br>
+	The whole interface is json based, built with the easy of use in mind.<br>
+	There are only 4 commands, ADD, GET, TAKE and DEL. TAKE is like GET + DEL. <br>
+	Queues are created on demand, if they dont exist. The protocol come as the <b>body=</b> query.<br></p>
+
+	<p class="desc">
+		jQueue provides the following REST routes:
+	</p>	
+	<ul>
+	  <li> <a href="/queue">/queue</a> - The QUEUE manager itself. There`s a form for quick testing
+	  <li> <a href="/stats">/stats/<queue name></a>- Stats for a given queue
+	  <li> <a href="/admin">/admin</a> - advanced administration
+	</ul>
+
+
+	<p>The protocol is as follows:</p>
+	
+	<p class="desc">
+		GET will only get the next element in queue, yielding its key, without deleting it.<br>
+		May be useful for of job scheduling, along with DEL.<br>
+		If this element is not DELeted, subsequent GET calls will get it again.
+	</p>
+	<pre class="protocol">
+	{
+	    "cmd": "get",
+            "queue": "main",
+            "apikey":"your-api-key"
+	}
+	</pre>
+	<pre class="response">
+	{
+	    "queue": "main",
+	    "key": "agRwb3JrchALEgpRdWV1ZU1vZGVsGAUM",
+ 	    "value": "abacab"
+	}
+	</pre>
+	<p class="desc">
+		ADD  will include a new element in the queue, yielding its key.<br>
+		The element will be placed in the end of the queue.
+	</p>
+	<pre class="protocol">
+	{
+	    "cmd": "add",
+	    "queue": "main",
+	    "value": "abacab",
+            "apikey":"your-api-key"}
+	</pre>
+	<pre class="response">
+	{
+	    "queue": "main",
+	    "key": "agRwb3JrchALEgpRdWV1ZU1vZGVsGAsM",
+	    "value": "abacab4"
+	}
+	</pre>
+	<p class="desc">
+		TAKE will get the next element in queue, deleting it. The key will be sent back.<br>
+		This is how some of the simplest STOMP queues work, and it`s useful for fast discharging.
+	</p>
+	<pre class="protocol">
+	{
+	    "cmd": "take",
+	    "queue": "main",
+            "apikey":"your-api-key"}
+	}
+	</pre>
+	<pre class="response">
+	{
+	    "queue": "main",
+	    "key": "agRwb3JrchALEgpRdWV1ZU1vZGVsGAUM",
+	    "value": "abacab"
+	}
+	</pre>
+	<p class="desc">
+		DEL will delete a given element by the key. The key will be sent back if the operation was performed.<br>
+		In association with GET, it enables a basic job scheduler. Along with the keys, it may help managing the queue content.
+	</p>
+	<pre class="protocol">
+	{
+	    "cmd": "del",
+	    "queue": "main",
+	    "key": "agRwb3JrchALEgpRdWV1ZU1vZGVsGAcM",
+            "apikey":"your-api-key"}
+	}
+	</pre>
+	<pre class="response">
+	{
+	    "queue": "main",
+	    "key": "agRwb3JrchALEgpRdWV1ZU1vZGVsGAcM"
+	}
+	</pre>
+</div>
+</body>
+</html>
+

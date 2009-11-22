@@ -1,0 +1,6 @@
+RestMQ - Appengine version
+Simple Message Queue which uses REST routes, HTTP as transport layer and JSON as payload/protocol.
+This one can be seen running at http://jsonqueue.appspot.com.
+Protocol is simple and uses an API Key.
+There is a twisted/redis version too somewhere.
+

@@ -1,0 +1,21 @@
+{
+    "cmd": "get",
+    "queue": "main"
+}
+
+{
+    "cmd": "add",
+    "queue": "main",
+    "value": "abacab"
+}
+
+{
+    "cmd": "take",
+    "queue": "main"
+}
+
+{
+    "cmd": "del",
+    "queue": "main",
+    "key": "agRwb3JrchALEgpRdWV1ZU1vZGVsGAQM"
+}
