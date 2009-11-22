@@ -4,3 +4,68 @@ This one can be seen running at http://jsonqueue.appspot.com.
 Protocol is simple and uses an API Key.
 There is a twisted/redis version too somewhere.
 
+-- Quick Howto -----
+
+http://jsonqueue.appspot.com/admin
+create your API Key and save it. You may regenerate it later.
+
+{
+	"cmd": "add",
+	"queue": "genesis",
+        "value": "abacab",
+        "apikey":"your-api-key"
+}
+
+{
+	 "cmd": "add",
+	 "queue": "genesis",
+	 "value": "turn it on",
+         "apikey":"your-api-key"
+}
+
+{
+	 "cmd": "add",
+	 "queue": "genesis",
+	 "value": {"composer": "phil collins",
+"drummer":"phil collins"},
+         "apikey":"your-api-key"
+}
+
+http://jsonqueue.appspot.com/stats/genesis - 3 items on backlog
+
+{
+	 "cmd": "take",
+	 "queue": "genesis",
+         "apikey":"your-api-key"
+}
+
+http://jsonqueue.appspot.com/stats/genesis - 2 items on backlog
+
+{
+	 "cmd": "get",
+	 "queue": "genesis",
+         "apikey":"your-api-key"
+}
+
+do this 2 times, there must be a count field, which is incremented with every get request.
+
+{"queue": "genesis", "count": 1, "key": "aglqc29ucXVldWVyEQsSClF1ZXVlTW9kZWwYyRoM", "value": "turn it on"}
+
+do whatever you want to do and delete this item using the key attribute (which is unique between queue items)
+
+{
+	 "cmd": "del",
+	 "queue": "genesis",
+ 	 "key":"aglqc29ucXVldWVyEQsSClF1ZXVlTW9kZWwYyRoM",
+         "apikey":"your-api-key"
+}
+
+check stats again, there must be just one item in the backlog
+http://jsonqueue.appspot.com/stats/genesis
+
+
+key - queue item unique id
+apikey - your API Key
+cmd - which command is meant to be executed
+value - any json object you wish to put in the queue.
+
